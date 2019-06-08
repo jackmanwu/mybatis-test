@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="600">
+    <Properties>
+        <Property name="LOG_HOME">${log.home}</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %c{-10} %L %M -- %msg%xEx%n"/>
+        </Console>
+
+        <RollingRandomAccessFile  name="Rolling"
+                     immediateFlush="${log.immediateFlush}"
+                     fileName="${LOG_HOME}/rolling.log"
+                     filePattern="${LOG_HOME}/rolling.log.%d{yyyy-MM-dd}.gz">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %c{-10} %L %M -- %msg%xEx%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile >
+        <RollingFile  name="mybatis-test"
+                     immediateFlush="${log.immediateFlush}"
+                     fileName="${LOG_HOME}/mybatis-test.log"
+                     filePattern="${LOG_HOME}/mybatis-test.log.%d{yyyy-MM-dd}.gz">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %c{-10} %L %M -- %msg%xEx%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile >
+    </Appenders>
+
+    <Loggers>
+        <root level="INFO" includeLocation="true">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="Rolling"/>
+        </root>
+    </Loggers>
+</Configuration>
