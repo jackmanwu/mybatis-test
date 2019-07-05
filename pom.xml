@@ -12,5 +12,6 @@
     <modules>
         <module>mybatis-test-common</module>
         <module>mybatis-test-jackmanwu</module>
+        <module>spring-test-jackmanwu</module>
     </modules>
 </project>
